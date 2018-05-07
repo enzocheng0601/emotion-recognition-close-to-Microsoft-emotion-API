@@ -66,7 +66,6 @@ def train():
         for step in np.arange(MAX_STEP):
             if coord.should_stop():
                     break
-                
             tra_images, tra_labels = sess.run([tra_image_batch, tra_label_batch])
             _, tra_loss, tra_acc = sess.run([train_op, loss, accuracy],
                                             feed_dict={x:tra_images, y_:tra_labels})            

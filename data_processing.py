@@ -4,6 +4,7 @@ import sys
 import json
 import cv2
 import numpy as np
+import time
 
 def get_label():
 	combined_image_path = sys.argv[2]
@@ -13,16 +14,17 @@ def get_label():
 	if not os.path.exists(json_file_output_path):
 		os.mkdir(json_file_output_path)
 
-	print('getting label from MS emotion api...')
+	print(' getting label from MS emotion api...')
 	for image_name in os.listdir(combined_image_path):
 		number = image_name.split('.')[0]
 		p = subprocess.Popen([emotion_api_path, combined_image_path+image_name, json_file_output_path + str(number)+'.json'])
 		p.wait()
-	sys.stdout.write("\033[K")
+	print(' finished')
+	time.sleep(1)
 
 
-def labeling(filenames, label):
-	print('labeling...')
+def labeling(filenames, label, index):
+	print(' labeling %s data...' %index)
 	combined_image_path = sys.argv[2]
 	json_data_path = sys.argv[3]
 	train_image_path = os.getcwd() + '/train_image_dir/'
@@ -49,7 +51,9 @@ def labeling(filenames, label):
 			label.append(label_array)
 			filenames.append(train_image_path + str(counter) + '.jpg')
 			counter += 1
+	print(' finished')
+	time.sleep(1)
+	os.system('cls')
 	return filenames, label
-	sys.stdout.write("\033[K")
 			
 

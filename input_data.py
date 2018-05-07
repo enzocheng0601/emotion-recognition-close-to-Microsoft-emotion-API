@@ -35,17 +35,17 @@ def read_image(is_train, batch_size, shuffle):
         
         if is_train:
             print('preparing data for training...')
+            index = 'training'
             filenames = []
             label = []
             data_processing.get_label()
-            filenames, label = data_processing.labeling(filenames, label)
-            sys.stdout.write("\033[K")
+            filenames, label = data_processing.labeling(filenames, label, index)
         else:
             print('preparing data for validation...')
+            index = 'validation'
             filenames = []
             label = []
-            filenames, label = data_processing.labeling(filenames, label)
-            sys.stdout.write("\033[K")
+            filenames, label = data_processing.labeling(filenames, label, index)
         #tmp = np.array([filenames, label])
         #tmp = tmp.transpose()
         #np.random.shuffle(tmp)

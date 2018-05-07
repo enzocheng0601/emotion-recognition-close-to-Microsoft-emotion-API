@@ -117,7 +117,7 @@ def extract_face():
                         max_height = 0
                         cv2.imwrite(combined_image_path + str(counter) + '.jpg', blank_image)
                         counter += 1
-        sys.stdout.write("\033[K")
+        
                     
 
         
