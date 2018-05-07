@@ -1,2 +1,32 @@
 # emotion-recognition-close-to-Microsoft-emotion-API
 a VGG-16 based CNN model implemented on TensorFlow trained through labeling by Microsoft emotion API
+
+train a FER (Facial expression recognition) model close to Microsoft emotion API on tensorflow.
+
+We use face_detection model, which is also implemented by tensorflow, to help us extract all faces in our dataset and then combine those faces every 50 faces into an image. Labeling those combined images through Microsoft emotion API and using these labels to train our model, this FER_model is based on VGG-16 CNN structure.
+
+dependencies you will need for training your own FER model in your own dataset:
+1. tensorflow: This model is built on tnesorflow, make sure that you have already had tensorflow on your work platform before you continue the following steps. (GPU version will be preferred, saving lots of time)
+2. install dependencies listed below through pip: cv2, pillow, matplotlib
+3. You will need a platform which is allowed to run an .exe file (Windows should be the only one qualified): Since we need label our images through Microsoft emotion API, which we have already packed into an .exe file, thus, make sure that you can run it successfully.
+
+how to train your own model in your own dataset:
+1. git clone this repository to your computer
+
+2. cd /to/the/directory/you/just/cloned/ 
+
+3. run python training_and_val.py with 7 arguments:
+        
+        arguv[1]: path to your own dataset
+        
+        arguv[2]: path to the output of combined images
+        
+        arguv[3]: path to the output of label return by Microsoft emotion API (json format)
+        
+        arguv[4]: path to the emotion API .exe file ( /this/repository/emotion_api/FaceID.exe)
+        
+        arguv[5]: path to store training log
+        
+        arguv[6]: path to store validation log
+        
+        arguv[7]: number of iteration (should be an integer)
