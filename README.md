@@ -6,7 +6,7 @@ train a FER (Facial expression recognition) model close to Microsoft emotion API
 We use face_detection model, which is also implemented by tensorflow, to help us extract all faces in our dataset and then combine those faces every 50 faces into an image. Labeling those combined images through Microsoft emotion API and using these labels to train our model, this FER_model is based on VGG-16 CNN structure.
 
 dependencies you will need for training your own FER model in your own dataset:
-1. tensorflow: This model is built on tnesorflow, make sure that you have already had tensorflow on your work platform before you continue the following steps. (GPU version will be preferred, saving lots of time)
+1. tensorflow: This model is built on tensorflow, make sure that you have already had tensorflow on your work platform before you continue the following steps. (GPU version will be preferred, saving lots of time)
 2. install dependencies listed below through pip: cv2, pillow, matplotlib
 3. You will need a platform which is allowed to run an .exe file (Windows should be the only one qualified): Since we need label our images through Microsoft emotion API, which we have already packed into an .exe file, thus, make sure that you can run it successfully.
 
