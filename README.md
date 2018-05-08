@@ -3,7 +3,7 @@ a VGG-16 based CNN model implemented on TensorFlow trained through labeling by M
 
 train a FER (Facial expression recognition) model close to Microsoft emotion API on tensorflow.
 
-We use face_detection model, which is also implemented by tensorflow, to help us extract all faces in our dataset and then combine those faces every 50 faces into an image. Labeling those combined images through Microsoft emotion API and using these labels to train our model, this FER_model is based on VGG-16 CNN structure.
+We use face_detection model, which is also implemented by tensorflow, to help us extract all faces in our dataset and then combine those faces, every 50 faces, into an image. Labeling those combined images through Microsoft emotion API and using these labels to train our model, this FER_model is based on VGG-16 CNN structure.
 
 dependencies you will need for training your own FER model in your own dataset:
 1. tensorflow: This model is built on tensorflow, make sure that you have already had tensorflow on your work platform before you continue the following steps. (GPU version will be preferred, saving lots of time)
