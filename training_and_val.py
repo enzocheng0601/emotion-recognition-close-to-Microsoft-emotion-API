@@ -19,7 +19,7 @@ IMG_H = 64
 N_CLASSES = 8
 BATCH_SIZE = 32
 learning_rate = 0.01
-MAX_STEP = sys.argv[7]   
+MAX_STEP = int(sys.argv[7])
 IS_PRETRAIN = True
 
 
