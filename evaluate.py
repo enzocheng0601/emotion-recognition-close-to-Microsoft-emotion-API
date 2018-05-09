@@ -11,18 +11,18 @@ import sys
 
 def evaluate():
     with tf.Graph().as_default():
+
         log_dir = sys.argv[1]
-        test_dir = sys.argv[2]
+        raw_test_dir = sys.argv[2]
+        test_dir = sys.argv[3]
+        test_json_file_dir = sys.argv[4]
+        emotion_api_dir = sys.argv[5]
         n_test = 0
+        N_CLASSES = 8
+        IS_PRETRAIN = False
+        images, labels = input_data.read_test_image(raw_test_dir, test_dir, test_json_file_dir, emotion_api_dir)
         for item in os.listdir(test_dir):
             n_test += 1
-
-        
-                
-        images, labels = input_data.read_image(data_dir = test_dir,
-                                                    is_train = False,
-                                                    batch_size = BATCH_SIZE,
-                                                    shuffle = False)
 
         logits = VGG.VGG16N(images, N_CLASSES, IS_PRETRAIN)
         correct = tools.num_correct_prediction(logits, labels)
@@ -45,15 +45,19 @@ def evaluate():
             
             try:
                 print('\nEvaluating......')
-                num_step = int(math.floor(n_test / BATCH_SIZE))
+                valid_test = len(sess.run(labels))
+                BATCH_SIZE = valid_test
+                num_step = int(math.floor(valid_test / BATCH_SIZE))
                 num_sample = num_step*BATCH_SIZE
                 step = 0
                 total_correct = 0
+                
                 while step < num_step and not coord.should_stop():
                     batch_correct = sess.run(correct)
                     total_correct += np.sum(batch_correct)
                     step += 1
                 print('Total testing samples: %d' %num_sample)
+                print('Valid testing samples: %d' %valid_test)
                 print('Total correct predictions: %d' %total_correct)
                 print('Average accuracy: %.2f%%' %(100*total_correct/num_sample))
             except Exception as e:

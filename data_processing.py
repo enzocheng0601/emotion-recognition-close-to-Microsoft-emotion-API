@@ -23,6 +23,8 @@ def get_label():
 	time.sleep(1)
 
 
+
+
 def labeling(filenames, label, index):
 	print(' labeling %s data...' %index)
 	combined_image_path = sys.argv[2]
@@ -44,12 +46,12 @@ def labeling(filenames, label, index):
 			(x, y, w, h) = (faceRectangle['left'], faceRectangle['top'], faceRectangle['width'], faceRectangle['height'])
 			emotion = faceAttribute['emotion']
 			label_array = []
-			for key in emotion.keys():
+			for key in sorted(emotion.keys()):
 				label_array.append(emotion[key])
 			roi_cropped = image[y:y + h, x: x + w]
 			cv2.imwrite(train_image_path + str(counter) + '.jpg', roi_cropped)
-			label.append(label_array)
 			filenames.append(train_image_path + str(counter) + '.jpg')
+			label.append(label_array)
 			counter += 1
 	print(' finished')
 	time.sleep(1)

@@ -19,7 +19,7 @@ IMG_H = 64
 N_CLASSES = 8
 BATCH_SIZE = 32
 learning_rate = 0.01
-MAX_STEP = int(sys.argv[7])
+MAX_STEP = int(sys.argv[7])   
 IS_PRETRAIN = True
 
 
@@ -66,6 +66,7 @@ def train():
         for step in np.arange(MAX_STEP):
             if coord.should_stop():
                     break
+                
             tra_images, tra_labels = sess.run([tra_image_batch, tra_label_batch])
             _, tra_loss, tra_acc = sess.run([train_op, loss, accuracy],
                                             feed_dict={x:tra_images, y_:tra_labels})            
@@ -93,6 +94,12 @@ def train():
         
     coord.join(threads)
     sess.close()
+
+
+
+
+
+
 
 if __name__ == "__main__":
     inference.extract_face()
