@@ -8,6 +8,7 @@ import VGG
 import tools
 import inference
 import sys
+import matplotlib.pyplot as plt
 
 def evaluate():
     with tf.Graph().as_default():
@@ -25,7 +26,8 @@ def evaluate():
             n_test += 1
 
         logits = VGG.VGG16N(images, N_CLASSES, IS_PRETRAIN)
-        correct = tools.num_correct_prediction(logits, labels)
+        log = tf.nn.softmax(logits)
+        correct = tools.num_correct_prediction(log, labels)
         saver = tf.train.Saver(tf.global_variables())
         
         with tf.Session() as sess:

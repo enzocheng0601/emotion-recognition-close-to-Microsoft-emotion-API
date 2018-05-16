@@ -28,19 +28,16 @@ def train():
     val_log_dir = sys.argv[6]
     
     with tf.name_scope('input'):
-        tra_image_batch, tra_label_batch = input_data.read_image(is_train=True,
+        tra_image_batch, tra_label_batch, val_image_batch, val_label_batch = input_data.read_image(is_train=True,
                                                  batch_size= BATCH_SIZE,
                                                  shuffle=True)
-        val_image_batch, val_label_batch = input_data.read_image(
-                                                 is_train=False,
-                                                 batch_size= BATCH_SIZE,
-                                                 shuffle=False)
         
     x = tf.placeholder(tf.float32, shape=[BATCH_SIZE, IMG_W, IMG_H, 3])
     y_ = tf.placeholder(tf.float32, shape=[BATCH_SIZE, N_CLASSES]) 
     
     logits = VGG.VGG16N(x, N_CLASSES, IS_PRETRAIN)
-    loss = tools.losses(logits, y_)
+    log = tf.nn.softmax(logits)
+    loss = tools.losses(log, y_)
     accuracy = tools.accuracy(logits, y_)
     
     my_global_step = tf.Variable(0, name='global_step', trainable=False) 
@@ -65,9 +62,9 @@ def train():
     try:
         for step in np.arange(MAX_STEP):
             if coord.should_stop():
-                    break
+                break
                 
-            tra_images, tra_labels = sess.run([tra_image_batch, tra_label_batch])
+            tra_images, tra_labels, val_images, val_labels = sess.run([tra_image_batch, tra_label_batch, val_image_batch, val_label_batch])
             _, tra_loss, tra_acc = sess.run([train_op, loss, accuracy],
                                             feed_dict={x:tra_images, y_:tra_labels})            
             if step % 50 == 0 or (step + 1) == MAX_STEP:                 
@@ -75,7 +72,6 @@ def train():
                 summary_str = sess.run(summary_op, feed_dict ={x: tra_images, y_:tra_labels})
                 tra_summary_writer.add_summary(summary_str, step)
             if step % 200 == 0 or (step + 1) == MAX_STEP:
-                val_images, val_labels = sess.run([val_image_batch, val_label_batch])
                 val_loss, val_acc = sess.run([loss, accuracy],
                                              feed_dict={x:val_images,y_:val_labels})
                 print('**  Step %d, val loss = %.2f, val accuracy = %.2f%%  **' %(step, val_loss, val_acc))

@@ -70,7 +70,7 @@ def test_load():
 		weights = data_dict[key][0]
 		biases = data_dict[key][1]
 def num_correct_prediction(logits, labels):
-  correct = tf.equal(tf.arg_max(logits, 1), tf.arg_max(labels, 1))
+  correct = tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1))
   correct = tf.cast(correct, tf.int32)
   n_correct = tf.reduce_sum(correct)
   return n_correct
