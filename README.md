@@ -45,5 +45,11 @@ how to train your own model in your own dataset:
         arguv[5]: path to the emotion API .exe file ( /this/repository/emotion_api/FaceID.exe)
         
  Result:
- The following result is based on the model with 6341 training image and 1586 validation images with 600 training step, 32       images per batch:
+ The following result is based on the model with 6341 training image and 1586 validation images with 600 training step, 32 images per batch: 
+ 
+ ![alt text](https://github.com/enzocheng0601/emotion-recognition-close-to-Microsoft-emotion-API/blob/master/demo/result.png)
+ 
+ The testing result, the accuracy, is pretty close to the result of training, which is about 59.8%.
+ 
+ 
  
