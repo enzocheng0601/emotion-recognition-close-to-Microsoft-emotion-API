@@ -30,3 +30,20 @@ how to train your own model in your own dataset:
         arguv[6]: path to store validation log
         
         arguv[7]: number of iteration (should be an integer)
+ 
+ How to evaluate the model:
+  same as how you run the training part but with different arguments:
+        
+        arguv[1]: path to where you store training log
+        
+        arguv[2]: path to the test directory
+        
+        arguv[3]: output path for real test image which is preprocessed
+        
+        arguv[4]: output path for the label of test image
+        
+        arguv[5]: path to the emotion API .exe file ( /this/repository/emotion_api/FaceID.exe)
+        
+ Result:
+ The following result is based on the model with 6341 training image and 1586 validation images with 600 training step, 32       images per batch:
+ 
